@@ -23,21 +23,14 @@ async function TrendingCoins() {
         if (!item) return null;
 
         return (
-          <Link
-            href={`/coins/${item.id}`}
-            className='group flex flex-col items-center gap-1'
-          >
+          <Link href={`/coins/${item.id}`}>
             <Image
               src={item.large}
               alt={item.name}
-              width={40}
-              height={40}
+              width={36}
+              height={36}
               unoptimized
-              className='rounded-full'
             ></Image>
-            <span className='text-xs text-gray-400 transition-colors group-hover:text-white'>
-              {item.name}
-            </span>
           </Link>
         );
       },
@@ -81,24 +74,18 @@ async function TrendingCoins() {
   ];
 
   return (
-    <div className='flex h-full flex-col rounded-2xl bg-[#1e2329] p-6 shadow-sm'>
-      <h2 className='mb-6 text-xl font-bold'>Trending Coins</h2>
-      <div
-        id='trending-coins'
-        className='custom-scrollbar flex-1 overflow-y-auto'
-      >
+    <>
+      <p>Trending Coins</p>
+      <div id='trending-coins'>
         <DataTable
           columns={columns}
           data={trendingCoins?.coins || []}
           rowKey={(coin) => coin.item.id}
-          tableClassName='border-none'
-          headerRowClassName='bg-transparent border-b border-gray-800'
-          headerCellClassName='text-gray-400 font-medium py-4!'
-          bodyRowClassName='border-b border-gray-800 hover:bg-[#2b3139]! transition-colors'
-          bodyCellClassName='py-4!'
-        />
+          headerCellClassName="py-3!"
+          bodyCellClassName="py-2!"
+        ></DataTable>
       </div>
-    </div>
+    </>
   );
 }
 

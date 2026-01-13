@@ -48,11 +48,11 @@ export async function fetcher<T>(
       const errorData: CoinGeckoErrorBody = await response
         .json()
         .catch(() => ({}));
-      console.error(
-        `CoinGecko API Error: ${response.status} - ${
-          errorData.status?.error_message || response.statusText
-        }`
-      );
+      // console.error(
+      //   `CoinGecko API Error: ${response.status} - ${
+      //     errorData.status?.error_message || response.statusText
+      //   }`
+      // );
       return null;
     }
 
