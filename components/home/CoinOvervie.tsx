@@ -30,7 +30,6 @@ const CoinOvervie = async () => {
     }
     return (
       <div className='flex h-full flex-col rounded-2xl bg-[#1e2329] p-8 shadow-sm'>
-
         <div className='flex items-center gap-4'>
           {coin.image?.large && (
             <Image

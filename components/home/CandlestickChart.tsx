@@ -14,6 +14,7 @@ import {
   ISeriesApi,
 } from "lightweight-charts";
 import { cn, convertOHLCData } from "@/lib/utils";
+import { Spinner } from "../ui/Spinner";
 
 const CandlestickChart = ({
   children,
@@ -23,9 +24,9 @@ const CandlestickChart = ({
   height = 360,
   initialPeriod = "daily",
 }: CandlestickChartProps) => {
-
   const [period, setPeriod] = useState(initialPeriod);
   const [isPending, startTransition] = useTransition();
+  const [loading, setLoading] = useState(true);
 
   const chartContainerRef = useRef<HTMLDivElement | null>(null);
 
@@ -33,6 +34,7 @@ const CandlestickChart = ({
   const candleSeriesRef = useRef<ISeriesApi<"Candlestick"> | null>(null);
   const fetchOHLCData = async (selectedPeriod: Period) => {
     try {
+      setLoading(true);
       const config = PERIOD_CONFIG[selectedPeriod];
       if (!config) {
         console.log("Invalid period selected");
@@ -44,6 +46,7 @@ const CandlestickChart = ({
         interval: config.interval || "daily",
         precision: "full",
       });
+      console.log("Fetched OHLC data:", newData);
     } catch (e) {
       console.log("Error fetching OHLC data:", e);
     }
@@ -70,7 +73,7 @@ const CandlestickChart = ({
     const series = chart.addSeries(CandlestickSeries, getCandlestickConfig());
 
     series.setData(convertOHLCData(data));
-
+    setLoading(false);
     chartRef.current = chart;
     candleSeriesRef.current = series;
 
@@ -91,7 +94,7 @@ const CandlestickChart = ({
   }, [height, ohlcData, period]);
 
   return (
-    <div className='flex h-full w-full flex-col gap-4'>
+    <div className='relative flex h-full w-full flex-col gap-4'>
       <div className='flex items-center justify-between'>
         <div className='flex items-center gap-2'>
           <span className='text-sm font-medium text-gray-400'>Period:</span>
@@ -99,29 +102,28 @@ const CandlestickChart = ({
             {PERIOD_BUTTONS.map((button) => (
               <button
                 key={button.value}
-                className={cn(
-                  "rounded-md px-3 py-1 text-xs font-medium transition-all",
-                  period === button.value
-                    ? "bg-[#474d57] text-white shadow-sm"
-                    : "text-gray-400 hover:text-gray-200"
-                )}
                 onClick={() => handlePeriodChange(button.value)}
                 disabled={isPending}
+                className={cn(
+                  "rounded-md px-3 py-1 text-sm font-medium transition-colors",
+                  period === button.value
+                    ? "bg-[#363c45] text-white"
+                    : "text-gray-400 hover:text-white"
+                )}
               >
                 {button.label}
               </button>
             ))}
           </div>
         </div>
-        {isPending && (
-          <div className='h-4 w-4 animate-spin rounded-full border-b-2 border-white' />
+      </div>
+      <div ref={chartContainerRef} className='relative w-full flex-1'>
+        {(loading || isPending) && (
+          <div className='absolute inset-0 z-10 flex items-center justify-center bg-[#1e2329]/80 backdrop-blur-sm transition-opacity'>
+            <Spinner size={40} />
+          </div>
         )}
       </div>
-
-      <div
-        ref={chartContainerRef}
-        className='relative min-h-[300px] w-full flex-1'
-      />
     </div>
   );
 };

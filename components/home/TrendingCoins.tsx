@@ -7,6 +7,7 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import DataTable from "../DataTable";
+import ImageWithSpinner from "../ui/ImageWithSpinner";
 
 async function TrendingCoins() {
   const trendingCoins = await fetcher<{ coins: TrendingCoin[] }>(
@@ -20,17 +21,17 @@ async function TrendingCoins() {
       cellClassName: "name-cell",
       cell: (coin) => {
         const item = coin?.item;
+        console.log(item);
         if (!item) return null;
 
         return (
           <Link href={`/coins/${item.id}`}>
-            <Image
+            <ImageWithSpinner
+              height={36}
+              width={36}
               src={item.large}
               alt={item.name}
-              width={36}
-              height={36}
-              unoptimized
-            ></Image>
+            ></ImageWithSpinner>
           </Link>
         );
       },
