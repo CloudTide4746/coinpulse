@@ -61,7 +61,7 @@ const invoices = [
 const DataTable = <T,>({
   columns = [],
   data = [],
-  rowkey = (_, index) => index,
+  rowKey = (_, index) => index,
   tableClassName,
   headerClassName,
   headerRowClassName,
@@ -78,7 +78,9 @@ const DataTable = <T,>({
             <TableHead
               key={i}
               className={cn(
-                "bg-dark-400 py-4 text-purple-100 first:pl-5 last:pr-6"
+                "bg-dark-400 py-4 text-purple-100 first:pl-5 last:pr-6",
+                headerCellClassName,
+                column.headerClassName
               )}
             >
               {column.header}
@@ -89,7 +91,7 @@ const DataTable = <T,>({
       <TableBody>
         {data.map((row, rowIndex) => (
           <TableRow
-            key={rowkey(row, rowIndex)}
+            key={rowKey(row, rowIndex)}
             className={cn(
               "hover:bg-dark-400/30! relative overflow-hidden rounded-lg border-b border-purple-100/5",
               bodyRowClassName
@@ -98,7 +100,11 @@ const DataTable = <T,>({
             {columns.map((column, cellIndex) => (
               <TableCell
                 key={cellIndex}
-                className={cn("py-4 first:pl-5 last:pr-6", bodyCellClassName)}
+                className={cn(
+                  "py-4 first:pl-5 last:pr-6",
+                  bodyCellClassName,
+                  column.cellClassName
+                )}
               >
                 {column.cell(row, rowIndex)}
               </TableCell>

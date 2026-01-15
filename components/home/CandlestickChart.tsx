@@ -23,7 +23,7 @@ const CandlestickChart = ({
   height = 360,
   initialPeriod = "daily",
 }: CandlestickChartProps) => {
-  const [loading] = useState(false);
+
   const [period, setPeriod] = useState(initialPeriod);
   const [isPending, startTransition] = useTransition();
 

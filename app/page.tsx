@@ -11,68 +11,11 @@ import { fetcher } from "@/lib/coingecko.actions";
 import CoinOvervie from "@/components/home/CoinOvervie";
 import TrendingCoins from "@/components/home/TrendingCoins";
 import {
+  CategoriesSkeleton,
   CoinOverviewSkeleton,
   TrendingCoinsSkeleton,
 } from "@/components/home/fallback";
-
-const fakeData: TrendingCoin[] = [
-  {
-    item: {
-      id: "bitcoin",
-      coin_id: 1,
-      name: "Bitcoin",
-      symbol: "BTC",
-      market_cap_rank: 1,
-      thumb: "/bitcoin.png",
-      small: "/bitcoin.png",
-      large: "/bitcoin.png",
-      slug: "bitcoin",
-      price_btc: 1,
-      score: 0,
-      data: {
-        price: 29225.0,
-        price_btc: "1",
-        price_change_percentage_24h: {
-          usd: 2.5,
-        },
-        market_cap: "$500B",
-        market_cap_btc: "19M",
-        total_volume: "$30B",
-        total_volume_btc: "1M",
-        sparkline: "",
-        content: null,
-      },
-    },
-  },
-  {
-    item: {
-      id: "ethereum",
-      coin_id: 2,
-      name: "Ethereum",
-      symbol: "ETH",
-      market_cap_rank: 2,
-      thumb: "/bitcoin.png",
-      small: "/bitcoin.png",
-      large: "/bitcoin.png",
-      slug: "ethereum",
-      price_btc: 0.05,
-      score: 1,
-      data: {
-        price: 1850.0,
-        price_btc: "0.06",
-        price_change_percentage_24h: {
-          usd: -1.2,
-        },
-        market_cap: "$200B",
-        market_cap_btc: "7M",
-        total_volume: "$15B",
-        total_volume_btc: "500K",
-        sparkline: "",
-        content: null,
-      },
-    },
-  },
-];
+import Categories from "@/components/home/Catagories";
 
 const page = async () => {
   // 两个await函数同时调用，就会导致速度减慢
@@ -94,8 +37,11 @@ const page = async () => {
           </Suspense>
         </div>
       </section>
+      {/* 这里将来放置真正的 Categories 组件 */}
       <section className='mt-7 w-full space-y-4'>
-        <p className='text-xl font-bold'>Categories</p>
+        <Suspense fallback={<CategoriesSkeleton />}>
+          <Categories></Categories>
+        </Suspense>
       </section>
     </main>
   );

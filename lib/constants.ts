@@ -118,3 +118,11 @@ export const LIVE_INTERVAL_BUTTONS: { value: "1s" | "1m"; label: string }[] = [
   { value: "1s", label: "1s" },
   { value: "1m", label: "1m" },
 ];
+export const CATOGORY_ORDERS: { value: string; label: string }[] = [
+  { value: "market_cap_desc", label: "Market Cap" },
+  { value: "market_cap_asc", label: "Market Cap (Asc)" },
+  { value: "name_asc", label: "Name (Asc)" },
+  { value: "name_desc", label: "Name (Desc)" },
+  { value: "market_volume_desc", label: "Market Volume" },
+  { value: "market_volume_asc", label: "Market Volume (Asc)" },
+];

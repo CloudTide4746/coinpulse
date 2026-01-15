@@ -62,3 +62,45 @@ export const TrendingCoinsSkeleton = () => {
     </div>
   );
 };
+
+export const CategoriesSkeleton = () => {
+  return (
+    <div className='w-full rounded-2xl bg-[#1e2329] p-6 shadow-sm'>
+      <div className='mb-6 flex items-center justify-between'>
+        <SkeletonBase className='h-7 w-32' /> {/* Title: Categories */}
+        <div className='flex items-center gap-2'>
+          <SkeletonBase className='h-5 w-16' />
+          <SkeletonBase className='h-8 w-32 rounded-lg' />
+        </div>
+      </div>
+
+      <div className='space-y-4'>
+        {/* Table Header */}
+        <div className='flex gap-4 border-b border-gray-800 pb-4'>
+          <SkeletonBase className='h-4 w-8' />
+          <SkeletonBase className='h-4 w-32' />
+          <SkeletonBase className='h-4 w-24' />
+          <SkeletonBase className='ml-auto h-4 w-24' />
+          <SkeletonBase className='ml-auto h-4 w-24' />
+          <SkeletonBase className='ml-auto h-4 w-24' />
+        </div>
+
+        {/* Table Rows */}
+        {[...Array(5)].map((_, i) => (
+          <div key={i} className='flex items-center gap-4 py-4 border-b border-gray-800/50 last:border-0'>
+            <SkeletonBase className='h-4 w-6' />
+            <SkeletonBase className='h-5 w-40' />
+            <div className='flex -space-x-2'>
+              <SkeletonBase className='h-7 w-7 rounded-full ring-2 ring-[#1e2329]' />
+              <SkeletonBase className='h-7 w-7 rounded-full ring-2 ring-[#1e2329]' />
+              <SkeletonBase className='h-7 w-7 rounded-full ring-2 ring-[#1e2329]' />
+            </div>
+            <SkeletonBase className='ml-auto h-5 w-16' />
+            <SkeletonBase className='ml-auto h-5 w-24' />
+            <SkeletonBase className='ml-auto h-5 w-20' />
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};

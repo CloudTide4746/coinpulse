@@ -75,14 +75,14 @@ async function TrendingCoins() {
 
   return (
     <>
-      <p>Trending Coins</p>
       <div id='trending-coins'>
+        <p className='mb-4 text-2xl font-bold text-white'>Trending Coins</p>
         <DataTable
           columns={columns}
           data={trendingCoins?.coins || []}
           rowKey={(coin) => coin.item.id}
-          headerCellClassName="py-3!"
-          bodyCellClassName="py-2!"
+          headerCellClassName='py-3!'
+          bodyCellClassName='py-2!'
         ></DataTable>
       </div>
     </>

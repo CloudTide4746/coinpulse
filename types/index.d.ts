@@ -34,6 +34,7 @@ export interface TrendingCoin {
 export interface DataTableColumn<T> {
   header: string;
   accessorKey?: keyof T;
+  headerClassName?: string;
   cellClassName?: string;
   cell: (row: T, index: number) => React.ReactNode;
 }
@@ -41,7 +42,7 @@ export interface DataTableColumn<T> {
 export interface DataTableProps<T> {
   columns: DataTableColumn<T>[];
   data: T[];
-  rowkey: (row: T, index: number) => string | number;
+  rowKey: (row: T, index: number) => string | number;
   tableClassName?: string;
   headerClassName?: string;
   headerRowClassName?: string;
@@ -65,6 +66,49 @@ export interface CoinDetailsData {
     };
     price_change_percentage_24h: number;
   };
+}
+
+export interface Category {
+  id: string;
+  name: string;
+  market_cap: number;
+  market_cap_change_24h: number;
+  content: string;
+  top_3_coins: string[];
+  volume_24h: number;
+}
+
+export interface CoinMarket {
+  id: string;
+  symbol: string;
+  name: string;
+  image: string;
+  current_price: number;
+  market_cap: number;
+  market_cap_rank: number;
+  fully_diluted_valuation: number | null;
+  total_volume: number;
+  high_24h: number;
+  low_24h: number;
+  price_change_24h: number;
+  price_change_percentage_24h: number;
+  market_cap_change_24h: number;
+  market_cap_change_percentage_24h: number;
+  circulating_supply: number;
+  total_supply: number | null;
+  max_supply: number | null;
+  ath: number;
+  ath_change_percentage: number;
+  ath_date: string;
+  atl: number;
+  atl_change_percentage: number;
+  atl_date: string;
+  roi: {
+    times: number;
+    currency: string;
+    percentage: number;
+  } | null;
+  last_updated: string;
 }
 
 export interface QueryParams {
