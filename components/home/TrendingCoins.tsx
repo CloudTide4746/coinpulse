@@ -77,7 +77,7 @@ async function TrendingCoins() {
   return (
     <>
       <div id='trending-coins'>
-        <p className='mb-4 text-2xl font-bold text-white'>Trending Coins</p>
+        <p className='mb-4 text-2xl font-bold text-white'> ...Trending Coins</p>
         <DataTable
           columns={columns}
           data={trendingCoins?.coins || []}
