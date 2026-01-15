@@ -108,10 +108,10 @@ const Page = () => {
         </p>
       </div>
 
-      <DataTable
+      <DataTable<CoinMarket>
         columns={columns}
         data={coins}
-        rowkey={(coin) => coin.id}
+        rowKey={(coin) => coin.id}
         tableClassName='w-full rounded-2xl bg-[#1e2329] shadow-sm overflow-hidden'
         headerRowClassName='bg-[#2b3139]/50'
         bodyRowClassName='border-b border-gray-800/50 hover:bg-white/5 transition-colors last:border-0'

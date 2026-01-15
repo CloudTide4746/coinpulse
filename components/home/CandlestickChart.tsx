@@ -18,8 +18,7 @@ import { Spinner } from "../ui/Spinner";
 
 const CandlestickChart = ({
   children,
-  data,
-  ohlcData,
+  data = [],
   coinId,
   height = 360,
   initialPeriod = "daily",
@@ -91,7 +90,7 @@ const CandlestickChart = ({
       chartRef.current = null;
       candleSeriesRef.current = null;
     };
-  }, [height, ohlcData, period]);
+  }, [height, data, period]);
 
   return (
     <div className='relative flex h-full w-full flex-col gap-4'>
